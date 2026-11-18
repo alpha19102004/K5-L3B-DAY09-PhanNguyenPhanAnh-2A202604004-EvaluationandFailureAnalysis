@@ -13,11 +13,12 @@ written by this script only -- never edit reports/ by hand.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import platform
 import tempfile
 import time
-from datetime import date
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -104,11 +105,20 @@ def run_eval(shape: str, spec: dict[str, Any], seeds: list[int] | None = None) -
                      "cost": float(c.output["result"].get("cost_estimate") or 0.0)})
     failures = [f"{c.name}:{f.name}:{f.error_message[:80]}" for c in report.cases for f in c.evaluator_failures]
     eval_set_sha = evalset.sha12(Path(spec["eval_set"]))
-    run_id = f"E-{shape}-{date.today():%Y%m%d}-{eval_set_sha[:4]}"
+    generated = datetime.now(timezone(timedelta(hours=7)))
+    run_id = f"E-{shape}-{generated:%Y%m%d}-{eval_set_sha[:4]}"
+    code_hash = hashlib.sha256()
+    for path in sorted([*Path("lab8").rglob("*.py"), *Path("lab9").rglob("*.py")]):
+        code_hash.update(path.as_posix().encode())
+        code_hash.update(path.read_text(encoding="utf-8").encode("utf-8"))
     return {"run_id": run_id, "shape": shape,
             "manifest": {"eval_set": spec["eval_set"], "eval_set_sha": eval_set_sha, "items": len(items),
                          "seeds": seeds, "metric_spec_version": spec["metric_spec_version"],
-                         "llm": "MockLLM", "python": platform.python_version()},
+                         "llm": "MockLLM", "python": platform.python_version(),
+                         "eval_set_version": spec["eval_set_version"],
+                         "labels_sha": evalset.sha12(Path(spec["labels"])),
+                         "metric_spec_sha": hashlib.sha256(json.dumps(spec, sort_keys=True).encode()).hexdigest()[:12],
+                         "code_sha": code_hash.hexdigest()[:12], "generated_at": generated.isoformat()},
             "rows": rows, "evaluator_failures": failures,
             "metrics": aggregate(rows, metric_ids, k_values=spec.get("pass_k", []))}
 
@@ -126,17 +136,14 @@ def aggregate(rows: list[dict[str, Any]], metric_ids: list[str], k_values: list[
         by_item.setdefault(r["item_id"], []).append(bool(r.get("pass_rate")))
     out["pass_5"] = round(sum(all(v) for v in by_item.values()) / len(by_item), 4) if by_item else None
     # pass@k / pass^k (M6): mean over items of the unbiased per-item estimate.
-    # Left as None until stats.pass_at_k / stats.pass_hat_k are implemented.
+    # Estimates require at least k seed trials for every item.
     for k in k_values:
         for name, fn in (("pass_at", stats.pass_at_k), ("pass_hat", stats.pass_hat_k)):
             if not by_item or min(len(v) for v in by_item.values()) < k:
                 out[f"{name}_{k}"] = None            # undefined with fewer than k runs per item
                 continue
-            try:
-                est = [fn(len(v), sum(v), k) for v in by_item.values()]
-                out[f"{name}_{k}"] = round(sum(est) / len(est), 4) if est else None
-            except NotImplementedError:
-                out[f"{name}_{k}"] = None
+            est = [fn(len(v), sum(v), k) for v in by_item.values()]
+            out[f"{name}_{k}"] = round(sum(est) / len(est), 4) if est else None
     passes = sum(bool(r.get("pass_rate")) for r in rows)
     out["cost_per_success"] = round(sum(r["cost"] for r in rows) / passes, 4) if passes else None
     return out
@@ -176,7 +183,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  not writing {out}: a report with broken graders must not become a baseline")
         return 2
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(rep, ensure_ascii=False, indent=2), encoding="utf-8")
+    out.write_text(json.dumps(rep, ensure_ascii=False, indent=2), encoding="utf-8", newline="\n")
     print(f"wrote {out}")
     return 0
 

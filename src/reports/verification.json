@@ -1,0 +1,278 @@
+{
+  "passed": true,
+  "commands": [
+    {
+      "name": "smoke",
+      "command": "python -m lab9.smoke",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "evalset_v1",
+      "command": "python -m lab9.evalset --build --check",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "evalset_v2",
+      "command": "python -m lab9.evalset --v2 --build",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "source_integrity",
+      "command": "python scripts/check_day8_source.py",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "host_tests",
+      "command": "python -m pytest -q",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "lab9_tests",
+      "command": "python -m pytest -q -m student -o addopts= -k lab9",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "tone",
+      "command": "python -m lab9.judge --csv data/eval/judge_tone_public.csv --audit 10",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "helpful",
+      "command": "python -m lab9.judge --csv data/eval/judge_helpful_public.csv --audit 10",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "ok": true
+    },
+    {
+      "name": "eval_swarm_v1",
+      "command": "python -m lab9.eval --shape swarm --spec config/metric_spec.yaml --out reports/baseline_v1.json",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "gate_swarm_v1",
+      "command": "python -m lab9.gate --pr reports/baseline_v1.json --baseline reports/baseline_v1.json --spec config/metric_spec.yaml --base-spec config/metric_spec.yaml",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "eval_fixed_v1",
+      "command": "python -m lab9.eval --shape fixed --spec config/metric_spec.yaml --out reports/eval_fixed.json",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "gate_fixed_v1",
+      "command": "python -m lab9.gate --pr reports/eval_fixed.json --baseline reports/baseline_v1.json --spec config/metric_spec.yaml --base-spec config/metric_spec.yaml",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "eval_seeded_regression_v1",
+      "command": "python -m lab9.eval --shape seeded_regression --spec config/metric_spec.yaml --out reports/eval_seeded_regression.json",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "gate_seeded_regression_v1",
+      "command": "python -m lab9.gate --pr reports/eval_seeded_regression.json --baseline reports/baseline_v1.json --spec config/metric_spec.yaml --base-spec config/metric_spec.yaml",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "ok": true
+    },
+    {
+      "name": "eval_swarm_v2",
+      "command": "python -m lab9.eval --shape swarm --spec config/metric_spec_v2.yaml --out reports/baseline_v2.json",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "gate_swarm_v2",
+      "command": "python -m lab9.gate --pr reports/baseline_v2.json --baseline reports/baseline_v2.json --spec config/metric_spec_v2.yaml --base-spec config/metric_spec_v2.yaml",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "eval_fixed_v2",
+      "command": "python -m lab9.eval --shape fixed --spec config/metric_spec_v2.yaml --out reports/eval_fixed_v2.json",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "gate_fixed_v2",
+      "command": "python -m lab9.gate --pr reports/eval_fixed_v2.json --baseline reports/baseline_v2.json --spec config/metric_spec_v2.yaml --base-spec config/metric_spec_v2.yaml",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "eval_seeded_regression_v2",
+      "command": "python -m lab9.eval --shape seeded_regression --spec config/metric_spec_v2.yaml --out reports/eval_seeded_regression_v2.json",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "gate_seeded_regression_v2",
+      "command": "python -m lab9.gate --pr reports/eval_seeded_regression_v2.json --baseline reports/baseline_v2.json --spec config/metric_spec_v2.yaml --base-spec config/metric_spec_v2.yaml",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "ok": true
+    },
+    {
+      "name": "eval_honest_refactor_v2",
+      "command": "python -m lab9.eval --shape honest_refactor --spec config/metric_spec_v2.yaml --out reports/eval_honest_refactor_v2.json",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "gate_honest_refactor_v2",
+      "command": "python -m lab9.gate --pr reports/eval_honest_refactor_v2.json --baseline reports/baseline_v2.json --spec config/metric_spec_v2.yaml --base-spec config/metric_spec_v2.yaml",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "eval_slice_regression_v2",
+      "command": "python -m lab9.eval --shape slice_regression --spec config/metric_spec_v2.yaml --out reports/eval_slice_regression_v2.json",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "gate_slice_regression_v2",
+      "command": "python -m lab9.gate --pr reports/eval_slice_regression_v2.json --baseline reports/baseline_v2.json --spec config/metric_spec_v2.yaml --base-spec config/metric_spec_v2.yaml",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "ok": true
+    },
+    {
+      "name": "eval_flaky_regression_v2",
+      "command": "python -m lab9.eval --shape flaky_regression --spec config/metric_spec_v2.yaml --out reports/eval_flaky_regression_v2.json",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "gate_flaky_regression_v2",
+      "command": "python -m lab9.gate --pr reports/eval_flaky_regression_v2.json --baseline reports/baseline_v2.json --spec config/metric_spec_v2.yaml --base-spec config/metric_spec_v2.yaml",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "ok": true
+    },
+    {
+      "name": "ci_baseline",
+      "command": "python -m lab9.ci_check --pr reports/baseline_v1.json --baseline reports/baseline_v1.json",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "detection",
+      "command": "python -m lab9.mutation --detect",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "aa_report",
+      "command": "python -m lab9.eval --shape swarm --spec config/metric_spec_v2.yaml --seeds 66,77,88,99,110 --out reports/aa_v2.json",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "aa",
+      "command": "python -m lab9.mutation --spec config/metric_spec_v2.yaml --aa 66,77,88,99,110",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "mutation",
+      "command": "python -m lab9.mutation --spec config/metric_spec_v2.yaml --baseline reports/baseline_v2.json --base-spec config/metric_spec_v2.yaml",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "traps",
+      "command": "python -m lab9.traps --pr reports/eval_slice_regression_v2.json --baseline reports/baseline_v2.json --spec config/metric_spec_v2.yaml",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "trap_cherry_picked_seeds",
+      "command": "python -m lab9.gate --pr reports/traps/cherry_picked_seeds.json --baseline reports/baseline_v2.json --spec config/metric_spec_v2.yaml --base-spec config/metric_spec_v2.yaml",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "ok": true
+    },
+    {
+      "name": "trap_dropped_failing_rows",
+      "command": "python -m lab9.gate --pr reports/traps/dropped_failing_rows.json --baseline reports/baseline_v2.json --spec config/metric_spec_v2.yaml --base-spec config/metric_spec_v2.yaml",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "ok": true
+    },
+    {
+      "name": "trap_evaluator_errors_as_nan",
+      "command": "python -m lab9.gate --pr reports/traps/evaluator_errors_as_nan.json --baseline reports/baseline_v2.json --spec config/metric_spec_v2.yaml --base-spec config/metric_spec_v2.yaml",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "ok": true
+    },
+    {
+      "name": "trap_loosened_spec",
+      "command": "python -m lab9.gate --pr reports/traps/loosened_spec.json --baseline reports/baseline_v2.json --spec reports/traps/loosened_spec.spec.yaml --base-spec config/metric_spec_v2.yaml",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "ok": true
+    },
+    {
+      "name": "trace_seeded_regression",
+      "command": "python -m lab9.trace_case --shape seeded_regression --claim C-002 --seed 11",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "trace_fixed",
+      "command": "python -m lab9.trace_case --shape fixed --claim C-002 --seed 11",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    },
+    {
+      "name": "write_docs",
+      "command": "python scripts/write_lab9_docs.py",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "ok": true
+    }
+  ]
+}

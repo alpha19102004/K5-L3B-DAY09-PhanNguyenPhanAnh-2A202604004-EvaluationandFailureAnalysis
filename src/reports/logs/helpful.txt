@@ -1,0 +1,13 @@
+n=100 P=1.0 R=0.3 kappa=0.375 {'tp': 9, 'fp': 0, 'fn': 21, 'tn': 70}
+fail rate observed 0.09 -> corrected 0.3
+  HL-015 human=FAIL judge=PASS | Dạ, LogiX đã hoàn 55.000đ cho đơn O-112 ạ.
+  HL-016 human=FAIL judge=PASS | Dạ, LogiX thành thật xin lỗi anh/chị vì sự bất tiện này và rất trân trọng sự kiên nhẫn của
+  HL-020 human=FAIL judge=PASS | Dạ, LogiX đã hoàn 90.000đ cho đơn O-303 ạ.
+  HL-028 human=FAIL judge=PASS | Dạ, LogiX thành thật xin lỗi anh/chị vì sự bất tiện này và rất trân trọng sự kiên nhẫn của
+  HL-035 human=FAIL judge=PASS | Dạ, Một lần nữa LogiX xin lỗi vì trải nghiệm chưa tốt, mong anh/chị thông cảm và tiếp tục 
+  HL-041 human=FAIL judge=PASS | Dạ, Một lần nữa LogiX xin lỗi vì trải nghiệm chưa tốt, mong anh/chị thông cảm và tiếp tục 
+  HL-043 human=FAIL judge=PASS | Dạ, LogiX rất tiếc vì đơn hàng đã đến trễ và xin lỗi anh/chị vì đã phải chờ đợi. LogiX đã 
+  HL-047 human=FAIL judge=PASS | Ok bạn, đơn O-515 xử lý rồi nhé.
+  HL-053 human=FAIL judge=PASS | Dạ, LogiX rất tiếc vì đơn hàng đã đến trễ và xin lỗi anh/chị vì đã phải chờ đợi. LogiX đã 
+  HL-058 human=FAIL judge=PASS | Dạ, LogiX rất tiếc vì đơn hàng đã đến trễ và xin lỗi anh/chị vì đã phải chờ đợi. LogiX đã 
+FAIL floors {'kappa': 0.6, 'precision': 0.8, 'recall': 0.7}

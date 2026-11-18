@@ -10,13 +10,13 @@ __pycache__/
 .pytest_cache/
 .DS_Store
 
-# Runtime output. Reports for grading (baseline_v1/v2, eval_fixed, eval_seeded_regression)
-# are committed with: git add -f reports/*.json
-src/reports/
+# Reproducible evaluation reports are part of the submission.
+# Runtime databases, caches and full traces stay local.
 traces/
 *.sqlite
 *.sqlite-*
 student_drop/
+.day8-upstream/
 
 # Instructor-only hidden pack from Day 8. Never push it.
 src/eval/instructor/
