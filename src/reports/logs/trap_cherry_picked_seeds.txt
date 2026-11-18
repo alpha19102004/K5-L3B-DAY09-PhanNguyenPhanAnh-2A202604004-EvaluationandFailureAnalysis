@@ -1,0 +1,9 @@
+gate: PR E-slice_regression-20261118-9047 vs main E-swarm-20261118-9047 · eval set 904779dfb98d
+  INTEGRITY PR: pass_at_3 summary is missing/non-finite
+  INTEGRITY PR: pass_hat_3 summary is missing/non-finite
+  INTEGRITY PR: pass_at_5 summary is missing/non-finite
+  INTEGRITY PR: pass_hat_5 summary is missing/non-finite
+  INTEGRITY PR (item_id, seed) set differs from baseline
+  INTEGRITY PR seeds differ from baseline
+  INTEGRITY PR seeds differ from spec
+exit 1 — blocked: integrity

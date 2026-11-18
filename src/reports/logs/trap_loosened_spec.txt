@@ -1,0 +1,14 @@
+gate: PR E-slice_regression-20261118-9047 vs main E-swarm-20261118-9047 · eval set 904779dfb98d
+  INTEGRITY ratchet: loosened min for db_fact_kept
+  INTEGRITY ratchet: loosened min for full_quote_kept
+  INTEGRITY ratchet: loosened min for refund_amount_correct
+  INTEGRITY ratchet: dropped no_significant_drop for refund_amount_correct
+  INTEGRITY ratchet: loosened min for pass_rate
+  INTEGRITY ratchet: dropped no_significant_drop for pass_rate
+  INTEGRITY ratchet: loosened min for pass_hat_5
+  INTEGRITY ratchet: loosened min for reply_ledger_correct
+  INTEGRITY ratchet: dropped no_significant_drop for reply_ledger_correct
+  INTEGRITY ratchet: removed ('money_movement', 'pass_rate')
+  INTEGRITY ratchet: removed ('adversarial', 'pass_rate')
+  INTEGRITY ratchet: removed ('denial', 'pass_rate')
+exit 1 — blocked: integrity

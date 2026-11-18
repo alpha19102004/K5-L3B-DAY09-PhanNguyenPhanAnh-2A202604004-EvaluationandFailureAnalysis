@@ -1,5 +1,27 @@
 # K5 · Day 9 · Lab — Evaluation & Failure Analysis (LogiX-VN)
 
+**Bản nộp cá nhân: Phan Nguyen Phan Anh · 2A202604004 · K5-L3B.**
+
+Đã tích hợp mã nguồn Day 8 gốc và triển khai M0–M7: thống kê calibration/bootstrap, trajectory graders, metric FM-08, eval set v1/v2, slice gate, pass@k/pass^k, integrity và ratchet. Mã trong `src/lab8/` được giữ nguyên và kiểm checksum bằng `src/scripts/check_day8_source.py`.
+
+Tái lập toàn bộ từ thư mục `src/` với môi trường Python đã cài dependencies:
+
+```bash
+python -m pip install -r requirements.txt -r requirements-lab9.txt
+python -m lab9.verify
+```
+
+Trên máy hiện tại, chạy từ thư mục gốc bằng PowerShell:
+
+```powershell
+Push-Location src
+try { & ..\.venv\Scripts\python.exe -m lab9.verify } finally { Pop-Location }
+```
+
+Kết quả và tài liệu: [Eval card](docs/eval_card.md), [Taxonomy](docs/failure_taxonomy.md), [Judge audit](docs/judge_audit.md), [Trace case](docs/trace_case.md), [PRD v1.1](docs/PRD_v1.1.md), [Nội dung PR](docs/PR_DESCRIPTION.md), [Bằng chứng kiểm tra](src/reports/verification.json). Report và log được script sinh, được giữ trong repo; `.gitignore` chỉ loại database, trace đầy đủ và cache. Chuẩn LF giữ checksum đồng nhất giữa Windows và Linux.
+
+Phần dưới lưu yêu cầu và hướng dẫn gốc của bài lab.
+
 > Nối tiếp Lab 8. Lab 8 trả lời "agent có chạy không"; Lab 9 trả lời **"làm sao biết bản mới tốt hơn — và chặn được bản tệ trước khi merge"**.
 > Không cần API key: MockLLM + judge replay. **Không Langfuse / OTel** (observability học ở Day 14).
 
